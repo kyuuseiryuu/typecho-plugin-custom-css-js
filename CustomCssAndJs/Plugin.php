@@ -69,31 +69,39 @@ class CustomCssAndJs_Plugin implements Typecho_Plugin_Interface
       echo "\n";
       echo '<!--CustomCssAndJs Header CSS End-->';
       echo "\n";
-    }
-
-    public static function footer(){
       $template = '<script src="JSURL"></script>';
       $urls = Typecho_Widget::widget('Widget_Options')->plugin('CustomCssAndJs')->footjs;
       $array = explode(',',$urls);
       $len = count($array);
       echo "\n";
-      echo '<!--CustomCssAndJs Footer JS Start-->';
+      echo '<!--CustomCssAndJs  JS Start-->';
       echo "\n";
       for($i=0;$i<$len;$i++){
         if(trim($array[$i])=='') continue;
         echo str_replace('JSURL',$array[$i],$template);
         echo "\n";
       }
+      echo '<!--CustomCssAndJs  JS End-->';
+      echo "\n";
+    }
+
+    public static function footer()
+    {
+    
+      
       $custjs = Typecho_Widget::widget('Widget_Options')->plugin('CustomCssAndJs')->custjs;
-      if(trim($custjs) != ''){
+      if(trim($custjs) != '')
+      {
+        echo '<!--CustomCssAndJs Footer JS Start-->';
         echo '<script>';
-        echo "\n";
         echo $custjs;
-        echo "\n";
         echo '</script>';
+        echo "\n";
+        echo '<!--CustomCssAndJs Footer JS End-->';
+        echo "\n";     
       }
-      echo "\n";
-      echo '<!--CustomCssAndJs Footer JS End-->';
-      echo "\n";
+        
+      
+      
     }
 }
